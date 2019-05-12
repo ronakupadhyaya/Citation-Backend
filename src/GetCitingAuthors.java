@@ -14,31 +14,32 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class GetCitedAuthors
+ * Servlet implementation class GetCitingAuthors
  */
-@WebServlet("/getCitedAuthors")
-public class GetCitedAuthors extends HttpServlet {
+@WebServlet("/getCitingAuthors")
+public class GetCitingAuthors extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	ArrayList<Result> citedAuthors;
+	ArrayList<Result> citingAuthors;
        
-    public GetCitedAuthors() throws FileNotFoundException {
+    public GetCitingAuthors() throws FileNotFoundException {
         super();	
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.addHeader("Access-Control-Allow-Origin", "*");
-		
-		citedAuthors = new ArrayList<Result>();
+		String name = request.getParameter("name");
+			
+		citingAuthors = new ArrayList<Result>();
 		ServletContext context = getServletContext();
-		String fullPath = context.getRealPath("/WEB-INF/files/citedauthors.txt");
+		String fullPath = context.getRealPath("/WEB-INF/files/citingauthors.txt");
 		Scanner scanner = new Scanner(new File(fullPath));
 		while(scanner.hasNext()) {
 			String line = scanner.nextLine();
-			citedAuthors.add(parseLine(line));
+			citingAuthors.add(parseLine(line));
 		}
 		scanner.close();
 		
-		String json = new Gson().toJson(Author.mergeAuthors(citedAuthors));
+		String json = new Gson().toJson(Author.mergeAuthors(citingAuthors));
 	    response.setContentType("application/json");
 	    response.setCharacterEncoding("UTF-8");
 	    response.getWriter().write(json);
