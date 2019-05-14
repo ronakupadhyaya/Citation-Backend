@@ -1,3 +1,7 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 
 public class Speaker {
@@ -24,6 +28,8 @@ class Talk {
 	String startTime;
 	String endTime;
 	String date;
+	String name;
+	String type;
 	
 	public Talk(String location, String topic, String startTime, String date) {
 		this.location = location;
@@ -40,3 +46,18 @@ class Talk {
 				"End Time: " + endTime + "\n";
 	}
 }
+
+class TalkComparator implements Comparator<Talk> 
+{ 
+    public int compare(Talk a, Talk b) { 
+    	String[] aDate = a.date.split("/");
+    	int aMonth = Integer.parseInt(aDate[0]);
+    	int aDay = Integer.parseInt(aDate[1]);
+    	
+    	String[] bDate = b.date.split("/");
+    	int bMonth = Integer.parseInt(bDate[0]);
+    	int bDay = Integer.parseInt(bDate[1]);
+    	
+    	return aMonth == bMonth ? aDay - bDay : aMonth - bMonth;
+    } 
+} 
