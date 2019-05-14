@@ -38,7 +38,7 @@ public class GetCitedAuthors extends HttpServlet {
 		}
 		scanner.close();
 		
-		String json = new Gson().toJson(Author.mergeAuthors(citedAuthors));
+		String json = new Gson().toJson(removeSelf(Author.mergeAuthors(citedAuthors), "Jacob Bien"));
 	    response.setContentType("application/json");
 	    response.setCharacterEncoding("UTF-8");
 	    response.getWriter().write(json);
@@ -53,6 +53,18 @@ public class GetCitedAuthors extends HttpServlet {
 		String name = result[0].split(":")[1].trim();
 		int count = Integer.parseInt(result[1].split(":")[1].trim());
 		return new Result(name, count);
+	}
+	
+	public static ArrayList<Result> removeSelf(ArrayList<Result> authors, String name) {
+		ArrayList<Result> result = new ArrayList<Result>();
+		for(int i = 0; i < authors.size(); i++) {
+			Result author = authors.get(i);
+			String authorName = author.name;
+			if(!authorName.equals(name)) {
+				result.add(author);
+			}
+		}
+		return result;
 	}
 
 }

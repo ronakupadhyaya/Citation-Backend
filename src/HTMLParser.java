@@ -22,6 +22,29 @@ public class HTMLParser {
 		this.authorsMap = new HashMap<String, Speaker>();
 	}
 	
+	public HashMap<String, HashSet<Talk>> getSelfMap(String name) {
+		HashMap<String, HashSet<Talk>> result = new HashMap<String, HashSet<Talk>>();
+		HashSet<Talk> resultSet = new HashSet<Talk>();
+		for(String speakerString: speakersMap.keySet()) {
+			if(isIdentical(name, speakerString)) {
+				Speaker speaker = speakersMap.get(speakerString);
+				HashSet<Talk> talks = speaker.talks;
+				resultSet.addAll(talks);
+				break;
+			}
+		}
+		for(String authorString: authorsMap.keySet()) {
+			if(isIdentical(name, authorString)) {
+				Speaker author = authorsMap.get(authorString);
+				HashSet<Talk> talks = author.talks;
+				resultSet.addAll(talks);
+				break;
+			}
+		}
+		result.put(name, resultSet);
+		return result;
+	}
+	
 	public HashMap<String, HashSet<Talk>> getSpeakerMap(ArrayList<String> names) {
 		HashMap<String, HashSet<Talk>> result = new HashMap<String, HashSet<Talk>>();
 		for(int i = 0; i < names.size(); i++) {

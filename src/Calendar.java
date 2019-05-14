@@ -34,7 +34,7 @@ public class Calendar {
 			hours += 12;
 		}
 
-		GregorianCalendar calendar = new GregorianCalendar(year, month - 1, day, hours + 6, minutes);
+		GregorianCalendar calendar = new GregorianCalendar(year, month - 1, day, hours, minutes);
 		Date date = calendar.getTime();
 
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");

@@ -55,19 +55,61 @@ public class getSchedule extends HttpServlet {
 		
 		HashMap<String, HashSet<Talk>> speakerMap = htmlparser.getSpeakerMap(authors);
 		HashMap<String, HashSet<Talk>> authorMap = htmlparser.getAuthorMap(authors);
+		HashMap<String, HashSet<Talk>> selfMap = htmlparser.getSelfMap("Jacob Bien");
+		cleanMaps(speakerMap, authorMap);
 		ArrayList<Event> speakerEvents = Calendar.getEvents(speakerMap);
 		ArrayList<Event> authorEvents = Calendar.getEvents(authorMap);
+		ArrayList<Event> selfEvents = Calendar.getEvents(selfMap);
 		
 		HashMap<String, ArrayList<Event>> schedule = new HashMap<String, ArrayList<Event>>();
 		schedule.put("Speaker", speakerEvents);
 		schedule.put("Author", authorEvents);
+		schedule.put("Self", selfEvents);
 		
 		String json = new Gson().toJson(schedule);
 	    response.setContentType("application/json");
 	    response.setCharacterEncoding("UTF-8");
 	    response.getWriter().write(json);
 	}
-
+	
+	public static void cleanMap(HashMap<String, HashSet<Talk>> map) {
+		HashSet<Talk> allTalks = new HashSet<Talk>();
+		for(String author: map.keySet()) {
+			HashSet<Talk> talks = map.get(author);
+			HashSet<Talk> talksCopy = new HashSet<Talk>(talks);
+			for(Talk talk: talksCopy) {
+				if(allTalks.contains(talk)) {
+					talks.remove(talk);
+				}
+				else {
+					allTalks.add(talk);
+				}
+			}
+		}
+	}
+	
+	public static void cleanMaps(HashMap<String, HashSet<Talk>> speakerMap, HashMap<String, HashSet<Talk>> authorMap) {
+		HashSet<Talk> allTalks = new HashSet<Talk>();
+		for(String speaker: speakerMap.keySet()) {
+			HashSet<Talk> talks = speakerMap.get(speaker);
+			for(Talk talk: talks) {
+				allTalks.add(talk);
+			}
+		}
+		for(String author: authorMap.keySet()) {
+			HashSet<Talk> talks = authorMap.get(author);
+			HashSet<Talk> talksCopy = new HashSet<Talk>(talks);
+			for(Talk talk: talksCopy) {
+				if(allTalks.contains(talk)) {
+					talks.remove(talk);
+				}
+				else {
+					allTalks.add(talk);
+				}
+			}
+		}
+	}
+	
 }
 
 class GetScheduleBody {
