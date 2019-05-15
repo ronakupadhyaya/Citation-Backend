@@ -34,9 +34,9 @@ public class Main {
 		HTMLParser htmlparser = new HTMLParser(file);
 		htmlparser.parse();
 		
-		HashMap<String, HashSet<Talk>> speakerMap = htmlparser.getSpeakerMap(citedAuthors);
-		HashMap<String, HashSet<Talk>> authorMap = htmlparser.getAuthorMap(citedAuthors);
-		GoogleCalendar googleCalendar = new GoogleCalendar(speakerMap, authorMap);
+//		HashMap<String, HashSet<Talk>> speakerMap = htmlparser.getSpeakerMap(citedAuthors);
+//		HashMap<String, HashSet<Talk>> authorMap = htmlparser.getAuthorMap(citedAuthors);
+//		GoogleCalendar googleCalendar = new GoogleCalendar(speakerMap, authorMap);
 		
 	}
 	

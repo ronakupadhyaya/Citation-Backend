@@ -1,9 +1,15 @@
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,14 +23,16 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import net.fortuna.ical4j.model.*;
+
 /**
- * Servlet implementation class getSchedule
+ * Servlet implementation class getSpeakerCalendar
  */
-@WebServlet("/getSchedule")
-public class getSchedule extends HttpServlet {
+@WebServlet("/getSpeakerCalendar")
+public class getSpeakerCalendar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public getSchedule() {
+
+    public getSpeakerCalendar() {
         super();
     }
 
@@ -34,42 +42,50 @@ public class getSchedule extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.addHeader("Access-Control-Allow-Origin", "*");
-		
-		StringBuilder buffer = new StringBuilder();
+
+		StringBuilder inputBuffer = new StringBuilder();
 	    BufferedReader reader = request.getReader();
 	    String line;
 	    while ((line = reader.readLine()) != null) {
-	        buffer.append(line);
+	        inputBuffer.append(line);
 	    }
-	    String data = buffer.toString();
+	    String data = inputBuffer.toString();
 	    JsonParser jsonParser = new JsonParser();
 	    JsonObject jsonObject = jsonParser.parse(data).getAsJsonObject();
 	    JsonElement jsonElement = jsonObject.get("authors");
 	    ArrayList<String> authors = new Gson().fromJson(jsonElement, ArrayList.class);
-	    
+
 	    ServletContext context = getServletContext();
 		String fullPath = context.getRealPath("/WEB-INF/files/JSM2019-Online-Program.htm");
 	    File file = new File(fullPath);
 		HTMLParser htmlparser = new HTMLParser(file);
 		htmlparser.parse();
-		
+
 		HashMap<String, HashSet<Talk>> speakerMap = htmlparser.getSpeakerMap(authors);
 		HashMap<String, HashSet<Talk>> authorMap = htmlparser.getAuthorMap(authors);
 		HashMap<String, HashSet<Talk>> selfMap = htmlparser.getSelfMap("Jacob Bien");
 		cleanMaps(speakerMap, authorMap);
 		ArrayList<Event> speakerEvents = CustomCalendar.getEvents(speakerMap);
-		ArrayList<Event> authorEvents = CustomCalendar.getEvents(authorMap);
-		ArrayList<Event> selfEvents = CustomCalendar.getEvents(selfMap);
-		
-		HashMap<String, ArrayList<Event>> schedule = new HashMap<String, ArrayList<Event>>();
-		schedule.put("Speaker", speakerEvents);
-		schedule.put("Author", authorEvents);
-		schedule.put("Self", selfEvents);
-		
-		String json = new Gson().toJson(schedule);
-	    response.setContentType("application/json");
-	    response.setCharacterEncoding("UTF-8");
-	    response.getWriter().write(json);
+
+		Calendar speakerCalendar = new Calendar();
+		try {
+			speakerCalendar = CustomCalendar.getICal(speakerEvents);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		response.setContentType("text/calendar");
+        response.setHeader("Content-disposition","attachment; filename=speakercalendar.ics");
+        System.out.println(speakerCalendar.toString());
+        OutputStream outputStream = response.getOutputStream();
+        InputStream inputStream = new ByteArrayInputStream(speakerCalendar.toString().getBytes());
+        byte[] buffer = new byte[4096];
+        int length;
+        while ((length = inputStream.read(buffer)) > 0){
+           outputStream.write(buffer, 0, length);
+        }
+        inputStream.close();
+        outputStream.flush();
 	}
 	
 	public static void cleanMaps(HashMap<String, HashSet<Talk>> speakerMap, HashMap<String, HashSet<Talk>> authorMap) {
@@ -93,9 +109,5 @@ public class getSchedule extends HttpServlet {
 			}
 		}
 	}
-	
-}
 
-class GetScheduleBody {
-	ArrayList<String> authors;
 }

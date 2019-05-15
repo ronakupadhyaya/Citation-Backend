@@ -64,35 +64,26 @@ public class GoogleCalendar {
     return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
   }
   
-  public GoogleCalendar(HashMap<String, HashSet<Talk>> speakerMap, HashMap<String, HashSet<Talk>> authorMap) {
+  public GoogleCalendar() {
 	  try {
 	      httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 	      dataStoreFactory = new FileDataStoreFactory(DATA_STORE_DIR);
 	      Credential credential = authorize();
 	      client = new com.google.api.services.calendar.Calendar.Builder(
 	          httpTransport, JSON_FACTORY, credential).setApplicationName(APPLICATION_NAME).build();
-
-	      Calendar speakerCalendar = addCalendar("JSM 2019 (Speakers)");
-	      Calendar authorCalendar = addCalendar("JSM 2019 (Authors)");
-	      addSpeakerEvents(speakerCalendar, speakerMap);
-	      addAuthorEvents(authorCalendar, authorMap);
-
 	    } catch (IOException e) {
 	      System.err.println(e.getMessage());
 	    } catch (Throwable t) {
 	      t.printStackTrace();
 	    }
-	    System.exit(1);
+//	    System.exit(1);
   }
 
   private void showCalendars() throws IOException {
-    View.header("Show Calendars");
     CalendarList feed = client.calendarList().list().execute();
-    View.display(feed);
   }
 
   private void addCalendarsUsingBatch() throws IOException {
-    View.header("Add Calendars using Batch");
     BatchRequest batch = client.batch();
 
     // Create the callback.
@@ -100,7 +91,6 @@ public class GoogleCalendar {
 
       @Override
       public void onSuccess(Calendar calendar, HttpHeaders responseHeaders) {
-        View.display(calendar);
         addedCalendarsUsingBatch.add(calendar);
       }
 
@@ -120,25 +110,21 @@ public class GoogleCalendar {
     batch.execute();
   }
 
-  private Calendar addCalendar(String calendarSummary) throws IOException {
-    View.header("Add Calendar");
+  Calendar addCalendar(String calendarSummary) throws IOException {
     Calendar entry = new Calendar();
     entry.setSummary(calendarSummary);
     Calendar result = client.calendars().insert(entry).execute();
-    View.display(result);
     return result;
   }
 
   private Calendar updateCalendar(Calendar calendar) throws IOException {
-    View.header("Update Calendar");
     Calendar entry = new Calendar();
     entry.setSummary("Updated Calendar for Testing");
     Calendar result = client.calendars().patch(calendar.getId(), entry).execute();
-    View.display(result);
     return result;
   }
 
-  private void addSpeakerEvents(Calendar speakerCalendar, HashMap<String, HashSet<Talk>> speakerMap) throws IOException {
+  void addSpeakerEvents(Calendar speakerCalendar, HashMap<String, HashSet<Talk>> speakerMap) throws IOException {
 	  for(String speakerString: speakerMap.keySet()) {
 		  HashSet<Talk> talks = speakerMap.get(speakerString);
 		  for(Talk talk: talks) {
@@ -147,7 +133,7 @@ public class GoogleCalendar {
 	  }
   }
   
-  private void addAuthorEvents(Calendar authorCalendar, HashMap<String, HashSet<Talk>> authorMap) throws IOException {
+  void addAuthorEvents(Calendar authorCalendar, HashMap<String, HashSet<Talk>> authorMap) throws IOException {
 	  for(String authorString: authorMap.keySet()) {
 		  HashSet<Talk> talks = authorMap.get(authorString);
 		  for(Talk talk: talks) {
@@ -161,7 +147,6 @@ public class GoogleCalendar {
 	  int month = Integer.parseInt(dateArray[0]);
 	  int day = Integer.parseInt(dateArray[1]);
 	  int year = Integer.parseInt(dateArray[2]);
-	  System.out.println(dateString + " " + timeString);
 	  
 	  String time = timeString.split("\\s+")[0];
 	  String[] timeArray = time.split(":");
@@ -176,7 +161,6 @@ public class GoogleCalendar {
 	  
       DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
       String dateAsISOString = df.format(date);
-      System.out.println(dateAsISOString);
       return dateAsISOString;
   }
   
@@ -186,7 +170,6 @@ public class GoogleCalendar {
 	  String startTime = talk.startTime;
 	  String endTime = talk.endTime;
 	  
-	  View.header("Add Event");
 	  Event event = new Event()
 			  .setSummary(author + " - " + topic)
 		      .setLocation("700 14th St, Denver, CO 80202")
@@ -205,7 +188,6 @@ public class GoogleCalendar {
 	  event.setEnd(end);
 	  
 	  Event result = client.events().insert(calendar.getId(), event).execute();
-	  View.display(result);
   }
 
   private Event newEvent() {
@@ -221,13 +203,10 @@ public class GoogleCalendar {
   }
 
   private void showEvents(Calendar calendar) throws IOException {
-    View.header("Show Events");
     Events feed = client.events().list(calendar.getId()).execute();
-    View.display(feed);
   }
 
   private void deleteCalendarsUsingBatch() throws IOException {
-    View.header("Delete Calendars Using Batch");
     BatchRequest batch = client.batch();
     for (Calendar calendar : addedCalendarsUsingBatch) {
       client.calendars().delete(calendar.getId()).queue(batch, new JsonBatchCallback<Void>() {
@@ -248,7 +227,6 @@ public class GoogleCalendar {
   }
 
   private void deleteCalendar(Calendar calendar) throws IOException {
-    View.header("Delete Calendar");
     client.calendars().delete(calendar.getId()).execute();
   }
 }
