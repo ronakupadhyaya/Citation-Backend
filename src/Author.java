@@ -16,13 +16,19 @@ public class Author {
 	OkHttpClient client;
 	ArrayList<Result> citedAuthors;
 	ArrayList<Result> citingAuthors;
+	int refereeCount;
 	
-	public Author(String firstName, String lastName) {
-		this.name = firstName + " " + lastName;
+	public Author(String name) throws IOException {
+		this.name = name;
 		this.papers = new ArrayList<Paper>();
-		//client = new OkHttpClient();
 		citedAuthors = new ArrayList<Result>();
 		citingAuthors = new ArrayList<Result>();
+		
+		refereeCount = 0;
+		client = new OkHttpClient();
+		setPapers();
+		setReferences();
+		setReferees();
 	}
 	
 	public void setPapers() throws IOException {
@@ -36,6 +42,7 @@ public class Author {
 		MicrosoftAcademicGraphResponse microsoftAcademicGraphResponse = gson.fromJson(jsonData, MicrosoftAcademicGraphResponse.class);
 		if(microsoftAcademicGraphResponse != null && microsoftAcademicGraphResponse.entities != null) {
 			for(int i = 0; i < microsoftAcademicGraphResponse.entities.length; i++) {
+				System.out.println("setpapers: " + i);
 				String title = microsoftAcademicGraphResponse.entities[i].Ti;
 				String year = microsoftAcademicGraphResponse.entities[i].Y;
 				String DOI = microsoftAcademicGraphResponse.entities[i].DOI;
@@ -48,19 +55,17 @@ public class Author {
 	public void setReferences() throws IOException {
 		CrossRef crossRef = new CrossRef(client);
 		for(int i = 0; i < papers.size(); i++) {
+			System.out.println("setreferences: " + i);
 			Paper paper = papers.get(i);
-			printPaper(paper);
 			String paperDOI = paper.DOI;
 			if(paperDOI != null) {
 				deserializeReferences(crossRef, paper, false);
 				ArrayList<Paper> references = paper.references;
 				for(int j = 0; j < references.size(); j++) {
 					Paper reference = references.get(j);
-					printPaper(reference);
 					String referenceDOI = reference.DOI;
 					if(referenceDOI != null) {
 						deserializeReferences(crossRef, reference, true);
-						//printAuthors(reference);
 					}
 				}
 			}
@@ -134,19 +139,17 @@ public class Author {
 		OpenCitations opencitations = new OpenCitations(client);
 		CrossRef crossRef = new CrossRef(client);
 		for(int i = 0; i < papers.size(); i++) {
+			System.out.println("setreferees: " + i);
 			Paper paper = papers.get(i);
-			printPaper(paper);
 			String paperDOI = paper.DOI;
 			if(paperDOI != null) {	
 				deserializeReferees(opencitations, paper);
 				ArrayList<Paper> referees = paper.referees;
 				for(int j = 0; j < referees.size(); j++) {
 					Paper referee = referees.get(j);
-					printPaper(referee);
 					String refereeDOI = referee.DOI;
 					if(refereeDOI != null) {
 						deserializeReferences(crossRef, referee, true);
-						//printAuthors(referee);
 					}
 				}
 			}
@@ -155,15 +158,21 @@ public class Author {
 	}
 	
 	public void deserializeReferees(OpenCitations opencitations, Paper paper) throws IOException {
+		if(refereeCount > 30) {
+			return;
+		}
 		ArrayList<Paper> referees = new ArrayList<Paper>();
 		
 		String jsonData = opencitations.information(paper.DOI);
-		//FileReader fileReader = new FileReader("opencitationstest.json");
 		Gson gson = new Gson();
 		OpenCitationsResponse[] openCitationsResponses = gson.fromJson(jsonData, OpenCitationsResponse[].class);
 		
 		if(openCitationsResponses != null) {
 			for(int i = 0; i < openCitationsResponses.length; i++) {
+				refereeCount++;
+				if(refereeCount > 30) {
+					break;
+				}
 				Paper referee = new Paper(openCitationsResponses[i].citing);
 				referees.add(referee);
 			}

@@ -17,22 +17,11 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		ArrayList<String> citingAuthors = new ArrayList<String>();
 		ArrayList<String> citedAuthors = new ArrayList<String>();
-		Scanner scanner;
-		scanner = new Scanner(new File("citingauthors.txt"));
-		while(scanner.hasNext()) {
-			String line = scanner.nextLine();
-			citingAuthors.add(parseLine(line));
-		}
-		scanner = new Scanner(new File("citedAuthors.txt"));
-		while(scanner.hasNext()) {
-			String line = scanner.nextLine();
-			citedAuthors.add(parseLine(line));
-		}
-		scanner.close();
+				
 		
-		File file = new File("JSM2019-Online-Program.htm");
-		HTMLParser htmlparser = new HTMLParser(file);
-		htmlparser.parse();
+//		File file = new File("JSM2019-Online-Program.htm");
+//		HTMLParser htmlparser = new HTMLParser(file);
+//		htmlparser.parse();
 		
 //		HashMap<String, HashSet<Talk>> speakerMap = htmlparser.getSpeakerMap(citedAuthors);
 //		HashMap<String, HashSet<Talk>> authorMap = htmlparser.getAuthorMap(citedAuthors);
