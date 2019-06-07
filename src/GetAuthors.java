@@ -26,14 +26,14 @@ public class GetAuthors extends HttpServlet {
         super();	
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
 		String name = request.getParameter("name");
 		if(name != null) {
 			Author author = new Author(name);
-			ArrayList<Result> citedAuthors = removeSelf(Author.mergeAuthors(author.citedAuthors), name);
-			ArrayList<Result> citingAuthors = removeSelf(Author.mergeAuthors(author.citingAuthors), name);
+			ArrayList<Result> citedAuthors = (Author.mergeAuthors(author.citedAuthors));
+			ArrayList<Result> citingAuthors = (Author.mergeAuthors(author.citingAuthors));
 			
 			HashMap<String, ArrayList<Result>> map = new HashMap<String, ArrayList<Result>>();
 			map.put("Cited Authors", citedAuthors);
@@ -46,11 +46,11 @@ public class GetAuthors extends HttpServlet {
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 	
-	private static Result parseLine(String line) {
+    public static Result parseLine(String line) {
 		String[] result = line.split(",");
 		String name = result[0].split(":")[1].trim();
 		int count = Integer.parseInt(result[1].split(":")[1].trim());
@@ -67,6 +67,32 @@ public class GetAuthors extends HttpServlet {
 			}
 		}
 		return result;
+	}
+	
+	public static ArrayList<Result> formatList(ArrayList<Result> authors) {
+		ArrayList<Result> result = new ArrayList<Result>();
+		for(int i = 0; i < authors.size(); i++) {
+			Result author = authors.get(i);
+			String authorName = author.name;
+			String formattedName = formatString(authorName);
+			author.name = formattedName;
+		}
+		return result;
+	}
+	
+	public static String formatString(String string) {
+		StringBuilder sb = new StringBuilder();
+		for(int i = 1; i < string.length(); i++) {
+			Character current = string.charAt(i);
+			Character previous = string.charAt(i - 1);
+			if(previous == ' ' || previous == '.' || previous == '-' || previous == '\'') {
+				sb.append(current);
+			}
+			else {
+				sb.append(Character.toLowerCase(current));
+			}
+		}
+		return sb.toString();
 	}
 
 }

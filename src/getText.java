@@ -35,11 +35,11 @@ public class getText extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
 		StringBuilder inputBuffer = new StringBuilder();
@@ -55,7 +55,7 @@ public class getText extends HttpServlet {
 	    ArrayList<String> authors = new Gson().fromJson(jsonElement, ArrayList.class);
 	    
 	    ServletContext context = getServletContext();
-		String fullPath = context.getRealPath("/WEB-INF/files/JSM2019-Online-Program.htm");
+		String fullPath = context.getRealPath("/WEB-INF/files/JSM2019-Online-Program-New.htm");
 	    File file = new File(fullPath);
 		HTMLParser htmlparser = new HTMLParser(file);
 		htmlparser.parse();
@@ -110,13 +110,14 @@ public class getText extends HttpServlet {
 		for(int i = 0; i < allTalks.size(); i++) {
 			Talk talk = allTalks.get(i);
 			sb.append(talk.date + "\n");
-			if(talk.type.equals("Speaker")) {
-				sb.append(talk.name + " - " + talk.topic + " (Speaker) \n");
+			if(talk.name.equals(talk.speaker)) {
+				sb.append(talk.name + " (Speaker: " + talk.speaker + ") - " + talk.topic + "\n");
 			}
 			else {
 				sb.append(talk.name + " - " + talk.topic + "\n");
 			}
 			sb.append(talk.startTime + " - " + talk.endTime + "\n");
+			sb.append("Location: " + talk.location + "\n");
 			sb.append("\n\n");
 		}		
 	}

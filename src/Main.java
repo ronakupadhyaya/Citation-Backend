@@ -19,9 +19,16 @@ public class Main {
 		ArrayList<String> citedAuthors = new ArrayList<String>();
 				
 		
-//		File file = new File("JSM2019-Online-Program.htm");
-//		HTMLParser htmlparser = new HTMLParser(file);
-//		htmlparser.parse();
+		File file = new File("JSM2019-Online-Program-New.htm");
+		HTMLParser htmlparser = new HTMLParser(file);
+		htmlparser.parse();
+		HashMap<String, HashSet<Talk>> selfMap = htmlparser.getSelfMap("Jacob Bien");
+		for(String name: selfMap.keySet()) {
+			HashSet<Talk> set = selfMap.get(name);
+			for(Talk talk: set) {
+				System.out.println(talk.toString());
+			}
+		}
 		
 //		HashMap<String, HashSet<Talk>> speakerMap = htmlparser.getSpeakerMap(citedAuthors);
 //		HashMap<String, HashSet<Talk>> authorMap = htmlparser.getAuthorMap(citedAuthors);

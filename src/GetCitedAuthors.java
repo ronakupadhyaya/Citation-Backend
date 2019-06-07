@@ -25,7 +25,7 @@ public class GetCitedAuthors extends HttpServlet {
         super();	
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
 		citedAuthors = new ArrayList<Result>();
@@ -44,11 +44,11 @@ public class GetCitedAuthors extends HttpServlet {
 	    response.getWriter().write(json);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 	
-	private static Result parseLine(String line) {
+    public static Result parseLine(String line) {
 		String[] result = line.split(",");
 		String name = result[0].split(":")[1].trim();
 		int count = Integer.parseInt(result[1].split(":")[1].trim());

@@ -25,7 +25,7 @@ public class GetCitingAuthors extends HttpServlet {
         super();	
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		String name = request.getParameter("name");
 			
@@ -45,18 +45,18 @@ public class GetCitingAuthors extends HttpServlet {
 	    response.getWriter().write(json);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 	
-	private static Result parseLine(String line) {
+    public static Result parseLine(String line) {
 		String[] result = line.split(",");
 		String name = result[0].split(":")[1].trim();
 		int count = Integer.parseInt(result[1].split(":")[1].trim());
 		return new Result(name, count);
 	}
 	
-	public static ArrayList<Result> slice(ArrayList<Result> authors) {
+    public static ArrayList<Result> slice(ArrayList<Result> authors) {
 		ArrayList<Result> result = new ArrayList<Result>();
 		for(int i = 0; i < authors.size(); i++) {
 			if(i == 30) break;

@@ -12,6 +12,7 @@ import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.CalScale;
+import net.fortuna.ical4j.model.property.Location;
 import net.fortuna.ical4j.model.property.Version;
 import net.fortuna.ical4j.util.UidGenerator;
 
@@ -55,12 +56,14 @@ public class CustomCalendar {
 		String date = talk.date;
 		String startTime = talk.startTime;
 		String endTime = talk.endTime;
+		String location = talk.location;
 		
-		String title = author + " - " + talk.topic;		
+		String title = author.equals(talk.speaker) ? 
+				author + " - " + talk.topic : author + " (Speaker: " + talk.speaker + ") - " + talk.topic;		
 		String start = formatDate(date, startTime);
 		String end = formatDate(date, endTime);
 
-		return new Event(title, start, end);
+		return new Event(title, start, end, location);
 	}
 	
 	public static Calendar getICal(ArrayList<Event> events) throws ParseException, SocketException {
@@ -76,8 +79,7 @@ public class CustomCalendar {
 			String title = event.title;
 			
 			VEvent vEvent = new VEvent(start, end, title);
-//			UidGenerator uidGenerator = new UidGenerator(Integer.toString(i));
-//			vEvent.getProperties().add(uidGenerator.generateUid());
+			vEvent.getProperties().add(new Location(event.location));
 			calendar.getComponents().add(vEvent);
 		}
 		
@@ -109,10 +111,12 @@ class Event {
 	String title;
 	String start;
 	String end;
+	String location;
 	
-	public Event(String title, String start, String end) {
+	public Event(String title, String start, String end, String location) {
 		this.title = title;
 		this.start = start;
 		this.end = end;
+		this.location = location;
 	}
 }

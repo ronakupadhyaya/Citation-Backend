@@ -28,11 +28,11 @@ public class getSchedule extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		
 		StringBuilder buffer = new StringBuilder();
@@ -44,18 +44,20 @@ public class getSchedule extends HttpServlet {
 	    String data = buffer.toString();
 	    JsonParser jsonParser = new JsonParser();
 	    JsonObject jsonObject = jsonParser.parse(data).getAsJsonObject();
-	    JsonElement jsonElement = jsonObject.get("authors");
-	    ArrayList<String> authors = new Gson().fromJson(jsonElement, ArrayList.class);
+	    JsonElement authorsJsonElement = jsonObject.get("authors");
+	    JsonElement nameJsonElement = jsonObject.get("name");
+	    ArrayList<String> authors = new Gson().fromJson(authorsJsonElement, ArrayList.class);
+	    String name = new Gson().fromJson(nameJsonElement, String.class);
 	    
 	    ServletContext context = getServletContext();
-		String fullPath = context.getRealPath("/WEB-INF/files/JSM2019-Online-Program.htm");
+		String fullPath = context.getRealPath("/WEB-INF/files/JSM2019-Online-Program-New.htm");
 	    File file = new File(fullPath);
 		HTMLParser htmlparser = new HTMLParser(file);
 		htmlparser.parse();
 		
 		HashMap<String, HashSet<Talk>> speakerMap = htmlparser.getSpeakerMap(authors);
 		HashMap<String, HashSet<Talk>> authorMap = htmlparser.getAuthorMap(authors);
-		HashMap<String, HashSet<Talk>> selfMap = htmlparser.getSelfMap("Jacob Bien");
+		HashMap<String, HashSet<Talk>> selfMap = htmlparser.getSelfMap(name);
 		cleanMaps(speakerMap, authorMap);
 		ArrayList<Event> speakerEvents = CustomCalendar.getEvents(speakerMap);
 		ArrayList<Event> authorEvents = CustomCalendar.getEvents(authorMap);

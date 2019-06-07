@@ -30,6 +30,7 @@ class Talk {
 	String date;
 	String name;
 	String type;
+	String speaker;
 	
 	public Talk(String location, String topic, String startTime, String date) {
 		this.location = location;
@@ -43,7 +44,8 @@ class Talk {
 				"Location: " + location + "\n" +
 				"Topic: " + topic + "\n" + 
 				"Start Time: " + startTime + "\n" +
-				"End Time: " + endTime + "\n";
+				"End Time: " + endTime + "\n" +
+				"Speaker:" + speaker + "\n";
 	}
 }
 

@@ -36,11 +36,11 @@ public class getSpeakerCalendar extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 
 		StringBuilder inputBuffer = new StringBuilder();
@@ -56,7 +56,7 @@ public class getSpeakerCalendar extends HttpServlet {
 	    ArrayList<String> authors = new Gson().fromJson(jsonElement, ArrayList.class);
 
 	    ServletContext context = getServletContext();
-		String fullPath = context.getRealPath("/WEB-INF/files/JSM2019-Online-Program.htm");
+		String fullPath = context.getRealPath("/WEB-INF/files/JSM2019-Online-Program-New.htm");
 	    File file = new File(fullPath);
 		HTMLParser htmlparser = new HTMLParser(file);
 		htmlparser.parse();

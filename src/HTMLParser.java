@@ -133,18 +133,20 @@ public class HTMLParser {
 	
 	public void parse() throws IOException {
 		Document document = Jsoup.parse(file, "utf-8"); 
-		PrintWriter parsedPrintWriter = new PrintWriter("parsed.txt", "UTF-8");
 		Elements tables = document.select("table table");
+		tables.remove(0);
 		for(Element table: tables) {
 			Elements rows = table.select("tr");
-			Element index = rows.get(0).select("a").get(0);
+			Element index = rows.get(0).select("a").get(0);	
+			if((!index.text().trim().matches("\\d+") && !index.text().contains("!"))
+					|| (index.text().trim().matches("\\d+") && Integer.parseInt(index.text()) > 665)) {
+				continue;
+			}
+			String location = rows.get(0).select("td").get(2).text();
 			String titleString = rows.get(1).select("td").get(0).text();
 			String datestampString = rows.get(0).select("td").get(1).text();
 			String dateString = datestampString.split(",")[1].trim();
 			String endTimeString = datestampString.split(",")[2].split("-")[1].trim();
-			if(!index.text().trim().matches("\\d+") && !index.text().contains("!")) {
-				continue;
-			}
 			ArrayList<Talk> talks = new ArrayList<Talk>();
 			for(int i = 1; i < rows.size(); i++) {
 				Element row = rows.get(i);
@@ -152,16 +154,17 @@ public class HTMLParser {
 					String timeString = row.select("td").get(0).ownText();
 					String talkString = row.select("td").get(1).text();
 					String topicString = row.select("td").get(1).select("a").text();
-					Talk talk = new Talk("TBA", topicString, timeString, dateString);
+					Talk talk = new Talk(location, topicString, timeString, dateString);
 					talks.add(talk);
-
+					
+					talk.speaker = row.select("td").get(1).select("b").text().trim().split(",")[0];
 					int topicEndIndex = talkString.indexOf(topicString) + topicString.length();
 					String authorsString = talkString.substring(topicEndIndex);
 					String[] authorsArray = authorsString.split(";");
 					for(int j = 0; j < authorsArray.length; j++) {
 						String authorString = authorsArray[j].trim().split(",")[0];
 						Speaker author;
-						if(j == 0) {
+						if(authorString.equals(talk.speaker)) {
 							if(speakersMap.containsKey(authorString)) {
 								author = speakersMap.get(authorString);
 				    		}
@@ -185,7 +188,6 @@ public class HTMLParser {
 			}
 			addEndTimes(talks, endTimeString);
 		}		
-		parsedPrintWriter.close();
 	}
 	
 	private void addEndTimes(ArrayList<Talk> talks, String endTimeString) {
