@@ -58,15 +58,18 @@ public class getSchedule extends HttpServlet {
 		HashMap<String, HashSet<Talk>> speakerMap = htmlparser.getSpeakerMap(authors);
 		HashMap<String, HashSet<Talk>> authorMap = htmlparser.getAuthorMap(authors);
 		HashMap<String, HashSet<Talk>> selfMap = htmlparser.getSelfMap(name);
+		HashMap<String, HashSet<Talk>> chairMap = htmlparser.getChairMap(name);
 		cleanMaps(speakerMap, authorMap);
 		ArrayList<Event> speakerEvents = CustomCalendar.getEvents(speakerMap);
 		ArrayList<Event> authorEvents = CustomCalendar.getEvents(authorMap);
 		ArrayList<Event> selfEvents = CustomCalendar.getEvents(selfMap);
+		ArrayList<Event> chairEvents = CustomCalendar.getEvents(chairMap);
 		
 		HashMap<String, ArrayList<Event>> schedule = new HashMap<String, ArrayList<Event>>();
 		schedule.put("Speaker", speakerEvents);
 		schedule.put("Author", authorEvents);
 		schedule.put("Self", selfEvents);
+		schedule.put("Chair", chairEvents);
 		
 		String json = new Gson().toJson(schedule);
 	    response.setContentType("application/json");

@@ -14,12 +14,14 @@ public class HTMLParser {
 	File file;
 	HashMap<String, Speaker> speakersMap;
 	HashMap<String, Speaker> authorsMap;
+	HashMap<String, Speaker> chairsMap;
 
 	
 	public HTMLParser(File file) {
 		this.file = file;
 		this.speakersMap = new HashMap<String, Speaker>();
 		this.authorsMap = new HashMap<String, Speaker>();
+		this.chairsMap = new HashMap<String, Speaker>();
 	}
 	
 	public HashMap<String, HashSet<Talk>> getSelfMap(String name) {
@@ -37,6 +39,21 @@ public class HTMLParser {
 			if(isIdentical(name, authorString)) {
 				Speaker author = authorsMap.get(authorString);
 				HashSet<Talk> talks = author.talks;
+				resultSet.addAll(talks);
+				break;
+			}
+		}
+		result.put(name, resultSet);
+		return result;
+	}
+	
+	public HashMap<String, HashSet<Talk>> getChairMap(String name) {
+		HashMap<String, HashSet<Talk>> result = new HashMap<String, HashSet<Talk>>();
+		HashSet<Talk> resultSet = new HashSet<Talk>();
+		for(String chairString: chairsMap.keySet()) {
+			if(isIdentical(name, chairString)) {
+				Speaker chair = chairsMap.get(chairString);
+				HashSet<Talk> talks = chair.talks;
 				resultSet.addAll(talks);
 				break;
 			}
@@ -148,14 +165,32 @@ public class HTMLParser {
 			String dateString = datestampString.split(",")[1].trim();
 			String endTimeString = datestampString.split(",")[2].split("-")[1].trim();
 			ArrayList<Talk> talks = new ArrayList<Talk>();
+			String chairName = null;
 			for(int i = 1; i < rows.size(); i++) {
 				Element row = rows.get(i);
+				if(row.text().contains("Chair")) {
+					chairName = row.text().substring(10).split(",")[0].trim();
+				}
 				if(row.text().contains(":") && (row.text().contains(" AM ") || row.text().contains(" PM "))) {
 					String timeString = row.select("td").get(0).ownText();
 					String talkString = row.select("td").get(1).text();
 					String topicString = row.select("td").get(1).select("a").text();
 					Talk talk = new Talk(location, topicString, timeString, dateString);
 					talks.add(talk);
+					
+					Speaker chair = null;
+					if(chairName != null) {
+						if(chairsMap.containsKey(chairName)) {
+							chair = chairsMap.get(chairName);
+						}
+						else {
+							chair = new Speaker(chairName);
+							chairsMap.put(chairName, chair);
+						}
+						if(talk.topic.length() != 0) {
+							chair.talks.add(talk);
+						}
+					}
 					
 					talk.speaker = row.select("td").get(1).select("b").text().trim().split(",")[0];
 					int topicEndIndex = talkString.indexOf(topicString) + topicString.length();

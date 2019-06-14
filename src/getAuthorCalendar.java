@@ -63,7 +63,6 @@ public class getAuthorCalendar extends HttpServlet {
 
 		HashMap<String, HashSet<Talk>> speakerMap = htmlparser.getSpeakerMap(authors);
 		HashMap<String, HashSet<Talk>> authorMap = htmlparser.getAuthorMap(authors);
-		HashMap<String, HashSet<Talk>> selfMap = htmlparser.getSelfMap("Jacob Bien");
 		cleanMaps(speakerMap, authorMap);
 		ArrayList<Event> authorEvents = CustomCalendar.getEvents(authorMap);
 

@@ -62,7 +62,6 @@ public class getText extends HttpServlet {
 		
 		HashMap<String, HashSet<Talk>> speakerMap = htmlparser.getSpeakerMap(authors);
 		HashMap<String, HashSet<Talk>> authorMap = htmlparser.getAuthorMap(authors);
-		HashMap<String, HashSet<Talk>> selfMap = htmlparser.getSelfMap("Jacob Bien");
 		cleanMaps(speakerMap, authorMap);
 		
 		ArrayList<Talk> allTalks = mergeMaps(speakerMap, authorMap);
@@ -110,7 +109,7 @@ public class getText extends HttpServlet {
 		for(int i = 0; i < allTalks.size(); i++) {
 			Talk talk = allTalks.get(i);
 			sb.append(talk.date + "\n");
-			if(talk.name.equals(talk.speaker)) {
+			if(!talk.name.equals(talk.speaker)) {
 				sb.append(talk.name + " (Speaker: " + talk.speaker + ") - " + talk.topic + "\n");
 			}
 			else {

@@ -11,6 +11,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
 
@@ -19,16 +20,21 @@ public class Main {
 		ArrayList<String> citedAuthors = new ArrayList<String>();
 				
 		
+//		PrintWriter printWriter = new PrintWriter("attendees.txt", "UTF-8");
 		File file = new File("JSM2019-Online-Program-New.htm");
 		HTMLParser htmlparser = new HTMLParser(file);
 		htmlparser.parse();
-		HashMap<String, HashSet<Talk>> selfMap = htmlparser.getSelfMap("Jacob Bien");
-		for(String name: selfMap.keySet()) {
-			HashSet<Talk> set = selfMap.get(name);
-			for(Talk talk: set) {
-				System.out.println(talk.toString());
-			}
-		}
+		HashMap<String, Speaker> speakersMap = htmlparser.speakersMap;
+		HashMap<String, Speaker> authorsMap = htmlparser.authorsMap;
+		HashMap<String, Speaker> chairsMap = htmlparser.chairsMap;
+			
+		HashSet<String> attendees = new HashSet<String>();
+		attendees.addAll(speakersMap.keySet());
+		attendees.addAll(chairsMap.keySet());
+//		for(String attendee : attendees) {
+//			printWriter.println(attendee);
+//		}
+//		printWriter.close();
 		
 //		HashMap<String, HashSet<Talk>> speakerMap = htmlparser.getSpeakerMap(citedAuthors);
 //		HashMap<String, HashSet<Talk>> authorMap = htmlparser.getAuthorMap(citedAuthors);
