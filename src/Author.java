@@ -18,7 +18,7 @@ public class Author {
 	ArrayList<Result> citingAuthors;
 	int refereeCount;
 	
-	public Author(String name) throws IOException {
+	public Author(String name) throws IOException, IllegalStateException {
 		this.name = name;
 		this.papers = new ArrayList<Paper>();
 		citedAuthors = new ArrayList<Result>();
@@ -31,7 +31,7 @@ public class Author {
 		setReferees();
 	}
 	
-	public void setPapers() throws IOException {
+	public void setPapers() throws IOException, IllegalStateException {
 		String expr = "Composite(AA.AuN=='" + name.toLowerCase() + "')";
 		String attributes = "Ti,Y,E.DOI";
 		
@@ -42,7 +42,7 @@ public class Author {
 		MicrosoftAcademicGraphResponse microsoftAcademicGraphResponse = gson.fromJson(jsonData, MicrosoftAcademicGraphResponse.class);
 		if(microsoftAcademicGraphResponse != null && microsoftAcademicGraphResponse.entities != null) {
 			for(int i = 0; i < microsoftAcademicGraphResponse.entities.length; i++) {
-				System.out.println("setpapers: " + i);
+//				System.out.println("setpapers: " + i);
 				String title = microsoftAcademicGraphResponse.entities[i].Ti;
 				String year = microsoftAcademicGraphResponse.entities[i].Y;
 				String DOI = microsoftAcademicGraphResponse.entities[i].DOI;
@@ -52,10 +52,10 @@ public class Author {
 		}
 	}
 	
-	public void setReferences() throws IOException {
+	public void setReferences() throws IOException, IllegalStateException {
 		CrossRef crossRef = new CrossRef(client);
 		for(int i = 0; i < papers.size(); i++) {
-			System.out.println("setreferences: " + i);
+//			System.out.println("setreferences: " + i);
 			Paper paper = papers.get(i);
 			String paperDOI = paper.DOI;
 			if(paperDOI != null) {
@@ -73,11 +73,14 @@ public class Author {
 		setCitedAuthors();
 	}
 	
-	public void deserializeReferences(CrossRef crossRef, Paper paper, boolean referencePaper) throws IOException {
+	public void deserializeReferences(CrossRef crossRef, Paper paper, boolean referencePaper) throws IOException, IllegalStateException {
 		ArrayList<Paper> references = new ArrayList<Paper>();
 		ArrayList<String> authors = new ArrayList<String>();
 		
 		String jsonData = crossRef.information(paper.DOI);
+		if(jsonData.contains("Resource not found")) {
+			return;
+		}
 		Gson gson = new Gson();
 		CrossRefResponse crossRefResponse = gson.fromJson(jsonData, CrossRefResponse.class);
 		
@@ -135,11 +138,11 @@ public class Author {
 		this.citedAuthors = citedAuthors;
 	}
 	
-	public void setReferees() throws IOException {
+	public void setReferees() throws IOException, IllegalStateException {
 		OpenCitations opencitations = new OpenCitations(client);
 		CrossRef crossRef = new CrossRef(client);
 		for(int i = 0; i < papers.size(); i++) {
-			System.out.println("setreferees: " + i);
+//			System.out.println("setreferees: " + i);
 			Paper paper = papers.get(i);
 			String paperDOI = paper.DOI;
 			if(paperDOI != null) {	
@@ -157,7 +160,7 @@ public class Author {
 		setCitingAuthors();
 	}
 	
-	public void deserializeReferees(OpenCitations opencitations, Paper paper) throws IOException {
+	public void deserializeReferees(OpenCitations opencitations, Paper paper) throws IOException, IllegalStateException {
 		if(refereeCount > 30) {
 			return;
 		}
