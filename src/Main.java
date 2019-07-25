@@ -28,37 +28,21 @@ import org.apache.poi.ss.usermodel.Row;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		ArrayList<String> citingAuthors = new ArrayList<String>();
-		ArrayList<String> citedAuthors = new ArrayList<String>();
-				
-		writeAttendees();
-		return;
-		
-////		PrintWriter printWriter = new PrintWriter("attendees.txt", "UTF-8");
-//		File file = new File("JSM2019-Online-Program-New.htm");
-//		HTMLParser htmlparser = new HTMLParser(file);
-//		htmlparser.parse();
-//		HashMap<String, Speaker> speakersMap = htmlparser.speakersMap;
-//		HashMap<String, Speaker> authorsMap = htmlparser.authorsMap;
-//		HashMap<String, Speaker> chairsMap = htmlparser.chairsMap;
-//			
-//		HashSet<String> attendees = new HashSet<String>();
-//		attendees.addAll(speakersMap.keySet());
-//		attendees.addAll(chairsMap.keySet());
-////		writeAPIData(attendees);
-////		writeEmptyAuthorData();
-////		fillGaps();
-//		sanityCheck();
-		
-		
-//		for(String attendee : attendees) {
-//			printWriter.println(attendee);
-//		}
-//		printWriter.close();
-		
-//		HashMap<String, HashSet<Talk>> speakerMap = htmlparser.getSpeakerMap(citedAuthors);
-//		HashMap<String, HashSet<Talk>> authorMap = htmlparser.getAuthorMap(citedAuthors);
-//		GoogleCalendar googleCalendar = new GoogleCalendar(speakerMap, authorMap);
+		File file = new File("precomputed_results.csv");
+		csvParser(file);
+	}
+	
+	public static void csvParser(File file) throws IOException {
+		PrintWriter printWriter = new PrintWriter("precomputed_attendees.txt", "UTF-8");
+		String fileName = "precomputed_results.csv";
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		String line = "";
+		while ((line = br.readLine()) != null) {
+            String[] arr = line.split(",");
+            String name = arr[0];
+            printWriter.println("\"" + name + "\",");
+        }
+		printWriter.close();
 	}
 	
 	public static void sanityCheck() throws IOException {

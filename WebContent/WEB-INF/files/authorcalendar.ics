@@ -1,0 +1,403 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190731T085000
+DTEND:20190731T090500
+SUMMARY:David C Christiani (Speaker: Katrina Devick) - Bayesian kernel machine causal mediation analysis
+LOCATION:CC-107
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190801T093500
+DTEND:20190801T095500
+SUMMARY:Pei Wang (Speaker: Lin Chen) - Using multivariate mixed-effects selection models for analyzing batch-processed proteomics data with non-ignorable missingness
+LOCATION:CC-113
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190728T160500
+DTEND:20190728T162500
+SUMMARY:Xiaotong Shen (Speaker: Ben Dai) - Embedding learning
+LOCATION:CC-605
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190729T101500
+DTEND:20190729T102000
+SUMMARY:Bin Yu (Speaker: Rebecca Barter) - Teaching data intuition: A book
+LOCATION:CC-502
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190731T144500
+DTEND:20190731T150500
+SUMMARY:Stefan Wager (Speaker: Rina Friedberg) - Model-free policy evaluation
+LOCATION:CC-106
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190801T115000
+DTEND:20190801T120500
+SUMMARY:George Michailidis (Speaker: Samrat Roy) - Regularized High Dimensional Low Tubal Rank Tensor Regression and its Applications
+LOCATION:CC-302
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190730T153500
+DTEND:20190730T155000
+SUMMARY:George Michailidis (Speaker: Satyajit Ghosh) - Bayesian Nested Lasso with Application to Mixed Frequency Data
+LOCATION:CC-110
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190729T101500
+DTEND:20190729T102000
+SUMMARY:George Michailidis (Speaker: Mohamad Kazem Shirani Faradonbeh) - Efficient Randomized Algorithms for Continuous Space Reinforcement Learning
+LOCATION:CC-501
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190730T120500
+DTEND:20190730T121000
+SUMMARY:George Michailidis (Speaker: Nilanjana Chakraborty) - High Dimensional Posterior Consistency in Mixed Frequency Bayesian Vector Autoregressive Models
+LOCATION:CC-501
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190730T110500
+DTEND:20190730T112000
+SUMMARY:George Michailidis (Speaker: Peiliang Bai) - Joint Estimation of Structured Multivariate VAR Modeling.
+LOCATION:CC-706
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190801T083500
+DTEND:20190801T085500
+SUMMARY:Lingzhou Xue (Speaker: Bingyuan Liu) - High-Dimensional Robust Scalar-on-Image Regression via Thresholding Function and Nonconvex Learning
+LOCATION:CC-210/212
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190729T095500
+DTEND:20190729T101500
+SUMMARY:Lingzhou Xue (Speaker: Kevin Lee) - Temporal Exponential-Family Random Graph Models with Time-Evolving Latent Block Structure for Dynamic Networks
+LOCATION:CC-301
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190729T083500
+DTEND:20190729T085500
+SUMMARY:Lingzhou Xue (Speaker: Arun Srinivasan) - High-dimensional Robust Covariance Matrix Estimation for Compositional Microbiome Data
+LOCATION:CC-301
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190731T150500
+DTEND:20190731T152000
+SUMMARY:Joseph Antonelli (Speaker: Ray Bai) - Spike-and-Slab Group Lassos for Grouped Regression and Sparse Generalized Additive Models
+LOCATION:CC-708
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190729T153500
+DTEND:20190729T155000
+SUMMARY:Runze Li (Speaker: Zhanrui Cai) - A CONSISTENT INDEPENDENCE TEST VIA PROJECTED MUTUAL INFORMATION
+LOCATION:CC-108
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190730T120500
+DTEND:20190730T122000
+SUMMARY:Runze Li (Speaker: Donna L. Coffman) - A new approach to functional regression mediation analysis with application to a smoking cessation intervention
+LOCATION:CC-701
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190801T085000
+DTEND:20190801T090500
+SUMMARY:Runze Li (Speaker: Xizhen Cai) - Estimation and Inference for the Mediation Effect in a Time-varying Mediation Model
+LOCATION:CC-501
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190730T095000
+DTEND:20190730T100500
+SUMMARY:Runze Li (Speaker: Jia Wang) - Variable Selection for High-dimensional Nodal Attributes in Social Networks
+LOCATION:CC-301
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190731T115500
+DTEND:20190731T121500
+SUMMARY:Runze Li (Speaker: Chixiang Chen) - A Novel Consistent Information Criterion for Model Selection based on Empirical Likelihood
+LOCATION:CC-709
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190729T095000
+DTEND:20190729T100500
+SUMMARY:Jerome Friedman (Speaker: Kenneth Tay) - Principal component-guided sparse regression
+LOCATION:CC-701
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190728T141500
+DTEND:20190728T142000
+SUMMARY:Fan Li (Speaker: John A Gallis) - xtgeebcv: A Stata command for bias-corrected sandwich variance estimation for GEE analyses of cluster randomized trials
+LOCATION:CC-103
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190731T140500
+DTEND:20190731T143000
+SUMMARY:Cun-Hui Zhang (Speaker: Rong Chen) - A factor model approach for high-dimensional dynamic tensor time series
+LOCATION:CC-501
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190731T083500
+DTEND:20190731T090000
+SUMMARY:Cun-Hui Zhang (Speaker: Hang Deng) - ISOTONIC REGRESSION IN MULTI-DIMENSIONAL SPACES AND GRAPHS
+LOCATION:CC-504
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190801T083500
+DTEND:20190801T090500
+SUMMARY:Cun-Hui Zhang (Speaker: Qiyang Han) - Limit distribution theory for multiple isotonic regression
+LOCATION:CC-505
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190801T103500
+DTEND:20190801T105000
+SUMMARY:Cun-Hui Zhang (Speaker: Wenhua Jiang) - General Maximum Likelihood Empirical Bayes Estimation of Heteroscedastic Normal Means
+LOCATION:CC-101
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190730T142500
+DTEND:20190730T144500
+SUMMARY:Youngjo Lee (Speaker: Il Do Ha) - Penalized h-likelihood approaches for various random-effects survival models
+LOCATION:CC-108
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190730T140500
+DTEND:20190730T142500
+SUMMARY:Youngjo Lee (Speaker: Maengseok Noh) - Analysis of Degradation Data using Double Hierarchical Generalized Linear Model
+LOCATION:CC-108
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190801T105000
+DTEND:20190801T110500
+SUMMARY:Sivaraman Balakrishnan (Speaker: Purvasha Chakravarti) - Gaussian Mixture Clustering Using Relative Tests of Fit
+LOCATION:CC-301
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190801T113500
+DTEND:20190801T115500
+SUMMARY:Brandon Willard (Speaker: Anindya Bhadra) - Prediction risk in linear regression models under global-local mixture priors
+LOCATION:CC-109
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190729T100500
+DTEND:20190729T102000
+SUMMARY:Shuangge Ma (Speaker: Chong Ma) - Structural modeling by using overlapped penalties for discovering predictive biomarkers
+LOCATION:CC-106
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190728T163500
+DTEND:20190728T165000
+SUMMARY:Qing Zhou (Speaker: Hangjian Li) - Gaussian DAGs on network data
+LOCATION:CC-503
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190729T092000
+DTEND:20190729T093500
+SUMMARY:Ali Shojaie (Speaker: Yue Wang) - GMDR: generalized matrix decomposition regression
+LOCATION:CC-701
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190730T105500
+DTEND:20190730T111500
+SUMMARY:Irina Gaynanova (Speaker: Yunfeng Zhang) - Joint association and classification analysis of multi-view data
+LOCATION:CC-704
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190730T105500
+DTEND:20190730T111500
+SUMMARY:Irina Gaynanova (Speaker: Benjamin Risk) - Data integration using joint and individual non-Gaussian component analysis
+LOCATION:CC-112
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190731T110500
+DTEND:20190731T112000
+SUMMARY:Guang Cheng (Speaker: Chi-Hua Wang) - Online Batch Decision Making with High-Dimensional Covariates
+LOCATION:CC-701
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190730T090500
+DTEND:20190730T091000
+SUMMARY:Guang Cheng (Speaker: Yue Xing) - Statistical Optimality of Interpolated Nearest Neighbor Algorithms
+LOCATION:CC-502
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190730T100500
+DTEND:20190730T102000
+SUMMARY:Guang Cheng (Speaker: Shih-Kang Chao) - Dynamic Stochastic Mirror Descent with Statistical Applications
+LOCATION:CC-505
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190801T083500
+DTEND:20190801T085500
+SUMMARY:Guang Cheng (Speaker: Qing Yang) - Statistical Analysis of Spiked Tensor Models
+LOCATION:CC-203
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190728T172000
+DTEND:20190728T173500
+SUMMARY:Menggang Yu (Speaker: Jared Davis Huling) - Semiparametric Sufficient Dimension Reduction for Populations with Structured Heterogeneity
+LOCATION:CC-108
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190730T110500
+DTEND:20190730T112000
+SUMMARY:Pang Du (Speaker: Yunnan Xu) - ISREA:A novel approach for Raman spectrum baseline correction and its application on real data
+LOCATION:CC-507
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190731T093500
+DTEND:20190731T095500
+SUMMARY:Lu Tian (Speaker: Hajime Uno) - A flexible test/estimation coherent approach to evaluate the treatment effect of immunotherapy on time-to-event outcomes
+LOCATION:CC-207
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190729T095000
+DTEND:20190729T095500
+SUMMARY:Jieping Ye (Speaker: Fan Zhou) - Equilibrium Metrics for Dynamic Supply-Demand Networks
+LOCATION:CC-501
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190729T142000
+DTEND:20190729T143500
+SUMMARY:Jieping Ye (Speaker: Kaixian Yu) - A statistical and machine learning framework for new energy vehicle ride sharing system
+LOCATION:CC-502
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190730T152500
+DTEND:20190730T154500
+SUMMARY:Jun S. Liu (Speaker: Minsuk Shin) - Bayesian Individualized Variable Selection
+LOCATION:CC-109
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190731T100000
+DTEND:20190731T100500
+SUMMARY:David Matteson (Speaker: Phillip Jang) - Functional Stochastic Volatility
+LOCATION:CC-103
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190729T092000
+DTEND:20190729T093500
+SUMMARY:David Matteson (Speaker: Yuxuan Zhao) - Group Non-Gaussian Component Analysis for Neuroimaging
+LOCATION:CC-507
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190731T094000
+DTEND:20190731T094500
+SUMMARY:David Matteson (Speaker: Yuchen Xu) - Testing Simultaneous Diagonalizability of Rrandom Matrices
+LOCATION:CC-103
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190729T105500
+DTEND:20190729T111500
+SUMMARY:Mathias Drton (Speaker: Y. Samuel Wang) - High Dimensional Causal Discovery with Non-Gaussian Data
+LOCATION:CC-708
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190729T150500
+DTEND:20190729T152500
+SUMMARY:Christian Lorenz Mueller (Speaker: Aditya Mishra) - Robust regression for microbiome data analysis
+LOCATION:CC-707
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190730T092000
+DTEND:20190730T093500
+SUMMARY:Ji Zhu (Speaker: Xuefei Zhang) - Estimating Latent Space Models for Network Data with Multivariate Response Variables
+LOCATION:CC-505
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190731T120500
+DTEND:20190731T122000
+SUMMARY:Ji Zhu (Speaker: Weijing Tang) - Semi-Supervised Sequence Learning using Deep Generative Models with Applications to Healthcare Data
+LOCATION:CC-701
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190729T105000
+DTEND:20190729T110500
+SUMMARY:Ji Zhu (Speaker: Wenshuo Liu) - Predicting 30-day Hospital Readmissions Using Deep Learning
+LOCATION:CC-504
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190730T142000
+DTEND:20190730T143500
+SUMMARY:Ji Zhu (Speaker: Hyesun Yoo) - Two-stage spectral co-clustering for matched communities
+LOCATION:CC-712
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190731T111500
+DTEND:20190731T113500
+SUMMARY:Noah Simon (Speaker: Brian Williamson) - A unified approach to nonparametric variable importance assessment
+LOCATION:CC-709
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190731T112000
+DTEND:20190731T113500
+SUMMARY:Noah Simon (Speaker: Jean Feng) - Uncertainty-aware black-box predictors with coverage guarantees
+LOCATION:CC-701
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190801T085500
+DTEND:20190801T091500
+SUMMARY:Ming Yuan (Speaker: Anru Zhang) - ISLET: Fast and Optimal Low-rank Tensor Regression via Importance Sketching
+LOCATION:CC-203
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20190725T001519Z
+DTSTART:20190731T105500
+DTEND:20190731T111500
+SUMMARY:Yiming Yang  (Speaker: Guoyi Zhang) - Identification of technical analysis patterns with smoothing splines for Bitcoin prices
+LOCATION:CC-103
+END:VEVENT
+END:VCALENDAR

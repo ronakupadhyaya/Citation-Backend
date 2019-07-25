@@ -75,7 +75,6 @@ public class getAuthorCalendar extends HttpServlet {
 
 		response.setContentType("text/calendar");
         response.setHeader("Content-disposition","attachment; filename=authorcalendar.ics");
-        System.out.println(authorCalendar.toString());
         OutputStream outputStream = response.getOutputStream();
         InputStream inputStream = new ByteArrayInputStream(authorCalendar.toString().getBytes());
         byte[] buffer = new byte[4096];
