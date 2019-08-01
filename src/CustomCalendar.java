@@ -10,9 +10,14 @@ import java.util.HashSet;
 
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.DateTime;
+import net.fortuna.ical4j.model.TimeZone;
+import net.fortuna.ical4j.model.TimeZoneRegistry;
+import net.fortuna.ical4j.model.TimeZoneRegistryFactory;
 import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.component.VTimeZone;
 import net.fortuna.ical4j.model.property.CalScale;
 import net.fortuna.ical4j.model.property.Location;
+import net.fortuna.ical4j.model.property.TzName;
 import net.fortuna.ical4j.model.property.Version;
 import net.fortuna.ical4j.util.UidGenerator;
 
@@ -70,12 +75,15 @@ public class CustomCalendar {
 		Calendar calendar = new Calendar();
 		calendar.getProperties().add(Version.VERSION_2_0);
 		calendar.getProperties().add(CalScale.GREGORIAN);
+		
+		TimeZoneRegistry registry = TimeZoneRegistryFactory.getInstance().createRegistry();
+		TimeZone tz = registry.getTimeZone("America/Denver");
+		
 		for(int i = 0; i < events.size(); i++) {
 			Event event = events.get(i);
-			System.out.println(i);
 
-			DateTime start = new DateTime(event.start);
-			DateTime end = new DateTime(event.end);
+			DateTime start = new DateTime(event.start, tz);
+			DateTime end = new DateTime(event.end, tz);
 			String title = event.title;
 			
 			VEvent vEvent = new VEvent(start, end, title);

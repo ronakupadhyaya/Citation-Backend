@@ -54,6 +54,8 @@ public class EmailSender extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    ArrayList<String> authors = new ArrayList<String>();
+	    authors.add("Jacob Bien");
+	    authors.add("Robert Tibshirani");
 
 	    ServletContext context = getServletContext();
 		String fullPath = context.getRealPath("/WEB-INF/files/JSM2019-Online-Program-New.htm");
@@ -74,7 +76,7 @@ public class EmailSender extends HttpServlet {
 	    String jacobBien = "<a href=\"http://faculty.marshall.usc.edu/Jacob-Bien/\">Jacob Bien</a>";
 	    String ronakUpadhyaya = "<a href=\"http://www.linkedin.com/in/ronakupadhyaya/\">Ronak Upadhyaya</a>";
 	    
-	    String subject = "Test from JSM Scheduler";
+	    String subject = "Hello from JSM Scheduler";
 	    String msg = "Hi " + name + ",<br/><br/>Results from the JSM Scheduler are attached below.  The .ics files can be imported into your iCloud or Google calendars.\n"
 	    		+ "<br/><br/>Recall that on the website, there were several lists of people whose work we think you may be interested in.  The attachments include two calendar files and a text file:\n"
 	    		+ "<br/><br/>1) speakercalendar.ics: talks where those people are the speakers"
@@ -128,7 +130,7 @@ public class EmailSender extends HttpServlet {
 	    String jacobBien = "<a href=\"http://faculty.marshall.usc.edu/Jacob-Bien/\">Jacob Bien</a>";
 	    String ronakUpadhyaya = "<a href=\"http://www.linkedin.com/in/ronakupadhyaya/\">Ronak Upadhyaya</a>";
 	    
-	    String subject = "Test from JSM Scheduler";
+	    String subject = "Hello from JSM Scheduler";
 	    String msg = "Hi " + name + ",<br/><br/>Results from the JSM Scheduler are attached below.  The .ics files can be imported into your iCloud or Google calendars.\n"
 	    		+ "<br/><br/>Recall that on the website, there were several lists of people whose work we think you may be interested in.  The attachments include two calendar files and a text file:\n"
 	    		+ "<br/><br/>1) speakercalendar.ics: talks where those people are the speakers"

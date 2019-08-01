@@ -55,11 +55,37 @@ class TalkComparator implements Comparator<Talk>
     	String[] aDate = a.date.split("/");
     	int aMonth = Integer.parseInt(aDate[0]);
     	int aDay = Integer.parseInt(aDate[1]);
+    	String[] aTime = a.startTime.split("\\s+");
+    	String[] aNumbers = aTime[0].split(":");
+    	String aPeriod = aTime[1];
+    	int aHour = Integer.parseInt(aNumbers[0]);
+    	int aMinute = Integer.parseInt(aNumbers[1]);
+    	if(aPeriod.equals("PM") && aHour != 12) {
+    		aHour += 12;
+    	}
+    	if(aPeriod.equals("AM") && aHour == 12) {
+    		aHour -= 12;
+    	}
     	
     	String[] bDate = b.date.split("/");
     	int bMonth = Integer.parseInt(bDate[0]);
     	int bDay = Integer.parseInt(bDate[1]);
+    	String[] bTime = b.startTime.split("\\s+");
+    	String[] bNumbers = bTime[0].split(":");
+    	String bPeriod = bTime[1];
+    	int bHour = Integer.parseInt(bNumbers[0]);
+    	int bMinute = Integer.parseInt(bNumbers[1]);
+    	if(bPeriod.equals("PM") && bHour != 12) {
+    		bHour += 12;
+    	}
+    	if(bPeriod.equals("AM") && bHour == 12) {
+    		bHour -= 12;
+    	}
     	
-    	return aMonth == bMonth ? aDay - bDay : aMonth - bMonth;
+    	if(!(aMonth == bMonth && aDay == bDay)) {
+    		return aMonth == bMonth ? aDay - bDay : aMonth - bMonth;
+    	}
+    	
+    	return aHour == bHour ? aMinute - bMinute : aHour - bHour;
     } 
 } 
